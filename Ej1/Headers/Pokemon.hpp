@@ -18,7 +18,9 @@ public:
 
 struct HashPokemon {
     std::size_t operator()(const Pokemon& p) const {
-        return std::hash<std::string>()(p.getNombre());
+        std::size_t h1 = std::hash<std::string>()(p.getNombre());
+        std::size_t h2 = std::hash<int>()(p.getXP());
+        return h1 ^ (h2 << 1); // Forma común para combinar hashes
     }
 };
 

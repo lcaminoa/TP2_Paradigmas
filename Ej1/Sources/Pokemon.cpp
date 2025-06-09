@@ -1,4 +1,4 @@
-#include "Pokedex.hpp"
+#include "../Headers/Pokemon.hpp"
 
 Pokemon::Pokemon(std::string newName, int newXp) : nombre(newName), xp(newXp) {}
 
@@ -11,5 +11,5 @@ int Pokemon::getXP() const {
 }
 
 bool Pokemon::operator==(const Pokemon& other) const {
-    return nombre == other.getNombre();
+    return nombre == other.nombre && xp == other.xp;
 }

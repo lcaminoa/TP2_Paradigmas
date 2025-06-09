@@ -12,6 +12,7 @@ private:
     std::array<int, 3> xpProximoNivel;
 public:
     PokemonInfo(std::string newTipo, std::string newDescripcion, std::map<std::string, int> newAtaques, std::array<int, 3> newXPProxNivel);
+    PokemonInfo(); // Por si no hay datos al buscar un pokemon en agregar()
 
     std::string getTipo() const;
     std::string getDescripcion() const;
