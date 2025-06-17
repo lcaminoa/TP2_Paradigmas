@@ -1,27 +1,23 @@
-#include <mutex>
-#include <thread>
+#include "Drone.hpp"
+#include "Hangar.hpp"
 
-class Hangar {
-private:
-    std::mutex zonas[5];
-public:
-    std::mutex& getZona(int i) {
-        return zonas[i];
+int main(){
+    Hangar hangar; //Se incializa con los mutex para las 5 zonas automaticamente
+    std::mutex mutex_out;
+    std::thread despegues[5];
+    Drone drones[5] = {
+        Drone(0, hangar.getZonas(), &mutex_out),
+        Drone(1, hangar.getZonas(), &mutex_out),
+        Drone(2, hangar.getZonas(), &mutex_out),
+        Drone(3, hangar.getZonas(), &mutex_out),
+        Drone(4, hangar.getZonas(), &mutex_out),
+    };
+    for (int i = 0; i<5; ++i){
+        despegues[i] = std::thread(&Drone::despegar, &drones[i]);
     }
-};
 
-class Drone {
-private:
-    int id; // Posición (de 0 a 4)
-    std::mutex* zonas;
-public:
-    int getId() const {
-        return id;
+    for (int i = 0; i<5; ++i){
+        despegues[i].join();
     }
-    void despegar() {
-        int izq = (id+1)%5; // Se tomó el drone 0 con zona der 0 y zona izq 1
-        int der = id;
-
-
-    }
-};
+    return 0;
+}

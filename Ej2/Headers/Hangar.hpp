@@ -1,14 +1,11 @@
-#ifndef HANGAR_HPP
-#define HANGAR_HPP
+#pragma once
 
 #include <mutex>
 #include <array>
 
 class Hangar {
 private:
-    std::mutex zonas[5];
+    std::mutex zonas[5]; //Al hacer esto, los mutex son inicializados automaticamente entonces no se necesita constructor
 public:
-    std::mutex& getZona(int i);
+    std::mutex* getZonas();
 };
-
-#endif //HANGAR_HPP
