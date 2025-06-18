@@ -30,11 +30,10 @@ void sensor(int idSensor, int cantidadTareas) {
             std::lock_guard<std::mutex> lock(mtxCola);
             colaTareas.push(t);
         }
-
         {
             std::lock_guard<std::mutex> lock(mutex_out);
             cvTareas.notify_one(); //Para evitar que se notifique a un robot antes de que se llegue a imprimir que se generó la tarea
-            std::cout << "[Sensor " << idSensor << "] Generó tarea " << i << "\n";
+            std::cout << "Sensor " << idSensor << " generó tarea " << i << "\n";
         }
     }
 }
@@ -54,21 +53,18 @@ void robot(int idRobot) {
 
             {
                 std::lock_guard<std::mutex> lock(mutex_out);
-                std::cout << "[Robot " << idRobot << "] Procesando tarea de Sensor "
-                        << t.idSensor << ", ID " << t.idTarea << "\n";
+                std::cout << "Robot " << idRobot << " esta procesando la tarea de Sensor " << t.idSensor << ", ID " << t.idTarea << "\n";
             }
-
             std::this_thread::sleep_for(std::chrono::milliseconds(250));
-        } else if (sensoresFinalizados) {
-            break;
-        }
+
+        } else if (sensoresFinalizados) {break;}
     }
 }
 
 int main() {
-    const int cantidadSensores = 3;
-    const int cantidadRobots = 3;
-    const int tareasPorSensor = 5;
+    int cantidadSensores = 3;
+    int cantidadRobots = 3;
+    int tareasPorSensor = 5;
 
     std::vector<std::thread> sensores;
     std::vector<std::thread> robots;

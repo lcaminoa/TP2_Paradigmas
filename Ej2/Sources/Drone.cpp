@@ -27,7 +27,7 @@ void Drone::despegar() {
 
     {
         std::lock_guard<std::mutex> lock(*mutex_out);
-        std::cout << "Dron " << getId() << " alcanzo una altura de 10m" << std::endl;
+        std::cout << "Dron " << getId() << " alcanzó una altura de 10m" << std::endl;
     }
 
 }
