@@ -2,10 +2,10 @@
 #include <utility>
 #include <fstream>
 
-Pokedex::Pokedex() = default; // Crea pokedex vacía
+Pokedex::Pokedex() = default; //Crea pokedex vacía
 
 Pokedex::Pokedex(const std::string& archivo) : archivo(archivo) {
-    // Falta esto...
+    cargarDesdeArchivo();
 }
 
 void Pokedex::mostrar(const Pokemon& p) const {
@@ -44,4 +44,33 @@ void Pokedex::mostrarTodos() const {
 
 void Pokedex::agregar(const Pokemon& p, const PokemonInfo& info) {
     this->info[p] = info;
+    guardarEnArchivo();
 }
+
+
+
+void Pokedex::guardarEnArchivo() {
+    std::ofstream out(archivo, std::ios::binary);
+    if (!out.is_open()) return;
+    size_t size = info.size();
+    out.write(reinterpret_cast<const char*>(&size), sizeof(size));
+    for (const auto& [p, pi] : info) {
+        p.serializar(out);
+        pi.serializar(out);
+    }
+}
+
+void Pokedex::cargarDesdeArchivo() {
+    std::ifstream in(archivo, std::ios::binary);
+    if (!in.is_open()) return;
+    size_t size;
+    in.read(reinterpret_cast<char*>(&size), sizeof(size));
+    for (size_t i = 0; i < size; ++i) {
+        Pokemon p;
+        PokemonInfo pi;
+        p.deserializar(in);
+        pi.deserializar(in);
+        info[p] = pi;
+    }
+}
+

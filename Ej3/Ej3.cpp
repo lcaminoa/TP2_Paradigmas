@@ -32,7 +32,7 @@ void sensor(int idSensor, int cantidadTareas) {
         }
         {
             std::lock_guard<std::mutex> lock(mutex_out);
-            cvTareas.notify_one(); //Para evitar que se notifique a un robot antes de que se llegue a imprimir que se generó la tarea
+            cvTareas.notify_one(); //El notify se puso en el guard para evitar que se notifique a un robot antes de que se llegue a imprimir que se generó la tarea
             std::cout << "Sensor " << idSensor << " generó tarea " << i << "\n";
         }
     }

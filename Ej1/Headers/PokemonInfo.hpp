@@ -3,6 +3,7 @@
 
 #include <string>
 #include <map>
+#include <fstream>
 
 class PokemonInfo {
 private:
@@ -18,6 +19,8 @@ public:
     std::string getDescripcion() const;
     std::map<std::string, int> getAtaquesDisponiblesPorNivel() const;
     std::array<int, 3> getXpProximoNivel() const;
+    void serializar(std::ofstream& out) const;
+    void deserializar(std::ifstream& in);
 };
 
 #endif //POKEMONINFO_HPP

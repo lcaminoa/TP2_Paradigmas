@@ -2,6 +2,7 @@
 #define POKEMON_HPP
 
 #include <string>
+#include <fstream>
 
 class Pokemon {
 private:
@@ -9,11 +10,14 @@ private:
     int xp;
 public:
     Pokemon(std::string newName, int newXp);
+    Pokemon(); //Para usar al deserealizar
 
     std::string getNombre() const;
     int getXP() const;
 
     bool operator==(const Pokemon& other) const;
+    void serializar(std::ofstream& out) const;
+    void deserializar(std::ifstream& in);
 };
 
 struct HashPokemon {
