@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -std=c++17 -pthread -Wall -Wextra -IHeaders
+CXXFLAGS = -std=c++17 -pthread -Wall -Wextra -Wpedantic -IHeaders
 SRC = Ej2.cpp Sources/Drone.cpp Sources/Hangar.cpp
 TARGET = Ej2
 

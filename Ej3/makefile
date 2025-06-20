@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -std=c++17 -pthread -Wall -Wextra
+CXXFLAGS = -std=c++17 -pthread -Wall -Wextra -Wpedantic
 SRC = Ej3.cpp
 TARGET = Ej3
 

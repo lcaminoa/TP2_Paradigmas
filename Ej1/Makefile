@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -std=c++17 -Wall -Wextra -IHeaders
+CXXFLAGS = -std=c++17 -Wall -Wextra -Wpedantic -IHeaders
 
 SRCS = main.cpp Sources/Pokedex.cpp Sources/Pokemon.cpp Sources/PokemonInfo.cpp
 
