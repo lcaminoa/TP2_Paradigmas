@@ -1,7 +1,7 @@
 CXX = g++
 CXXFLAGS = -std=c++17 -Wall -Wextra -Wpedantic -IHeaders
 
-SRCS = main.cpp Sources/Pokedex.cpp Sources/Pokemon.cpp Sources/PokemonInfo.cpp
+SRCS = Ej1.cpp Sources/Pokedex.cpp Sources/Pokemon.cpp Sources/PokemonInfo.cpp
 
 OUT = Ej1
 
